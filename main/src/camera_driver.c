@@ -1,7 +1,7 @@
 //======================================================================================================================
 /// @file       camera_driver.c
 /// @brief      camera driver
-/// @date       2024/7/2
+/// @date       2025/8/13
 //======================================================================================================================
 
 //======================================================================================================================
@@ -40,7 +40,7 @@
 //======================================================================================================================
 // Private values definition
 //======================================================================================================================
-static const char* TAG = "CAMERA";
+static const char* TAG = "CAMERA_DRIVER";
 
 static camera_config_t camera_config = {
     .pin_pwdn = CAM_PIN_PWDN,
@@ -64,11 +64,16 @@ static camera_config_t camera_config = {
     .ledc_timer = LEDC_TIMER_0,
     .ledc_channel = LEDC_CHANNEL_0,
     .pixel_format = PIXFORMAT_JPEG,
+    // .pixel_format = PIXFORMAT_RGB565,
     .frame_size = FRAMESIZE_QVGA,
+    // .frame_size = FRAMESIZE_QQVGA,
     .jpeg_quality = 12,
-    .fb_count = 1,
+    // .fb_count = 1,
+    .fb_count = 2,
+    // .fb_count = 2,
     .fb_location = CAMERA_FB_IN_PSRAM,
-    .grab_mode = CAMERA_GRAB_WHEN_EMPTY,
+    // .grab_mode = CAMERA_GRAB_WHEN_EMPTY,
+    .grab_mode = CAMERA_GRAB_LATEST,
 };
 
 //======================================================================================================================

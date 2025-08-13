@@ -2,7 +2,10 @@ idf_component_register(
     SRCS
         "src/main.c"
         "src/camera_driver.c"
-        "src/sdcard_fatfs_manager.c"
+        "src/sd_card_driver.c"
+        "src/lcd_driver.c"
+        "src/uart_command_task.c"
+        "src/camera_task.c"
     
     INCLUDE_DIRS 
         "."
@@ -12,4 +15,5 @@ idf_component_register(
         esp_timer
         nvs_flash
         fatfs
+        esp_lcd
 )
