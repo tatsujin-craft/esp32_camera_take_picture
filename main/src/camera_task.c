@@ -19,10 +19,10 @@
 //======================================================================================================================
 // Constant definition
 //======================================================================================================================
-#define ENABLE_SD_SAVE (false)
+#define ENABLE_SD_SAVE (true)
 
-#define GPIO_BTN_CAPTURE 0
-#define GPIO_LED_CAPTURE 2
+#define GPIO_BTN_CAPTURE 12
+#define GPIO_LED_CAPTURE 16
 
 //======================================================================================================================
 // Prototype
@@ -67,7 +67,7 @@ void camera_task_start(void) {
 #endif
 
   camera_button_init();
-  camera_led_init();
+  // camera_led_init();
 }
 
 // Send capture command to camera task
@@ -96,6 +96,10 @@ void camera_task_stop_stream(void) {
 static void camera_task(void* arg) {
   camera_cmd_t cmd;
   uint32_t saved_frame_count = 0;
+
+  vTaskDelay(pdMS_TO_TICKS(1000));
+  sd_simple_write_test();
+  ESP_LOGI(TAG, "sd_simple_write_test()");
 
   while (1) {
     if (xQueueReceive(camera_cmd_queue, &cmd,
@@ -144,7 +148,7 @@ static void camera_led_init(void) {
 }
 
 static void take_picture(void) {
-  gpio_set_level(GPIO_LED_CAPTURE, 1);  // LED ON
+  // gpio_set_level(GPIO_LED_CAPTURE, 1);  // LED ON
 
   camera_fb_t* frame_buffer = esp_camera_fb_get();
   if (frame_buffer) {
@@ -155,6 +159,7 @@ static void take_picture(void) {
     if (sdcard_save_picture(frame_buffer, saved_frame_count) == ESP_OK) {
       saved_frame_count++;
       ESP_LOGI(TAG, "Picture saved to SD");
+
     } else {
       ESP_LOGE(TAG, "Failed to save picture to SD");
     }
@@ -165,7 +170,7 @@ static void take_picture(void) {
     ESP_LOGE(TAG, "Failed to take picture");
   }
 
-  gpio_set_level(GPIO_LED_CAPTURE, 0);  // LED OFF
+  // gpio_set_level(GPIO_LED_CAPTURE, 0);  // LED OFF
 }
 
 static void display_picture(void) {

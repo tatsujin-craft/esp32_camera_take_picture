@@ -22,6 +22,7 @@ extern "C" {
 
 esp_err_t sdcard_init(void);
 esp_err_t sdcard_save_picture(camera_fb_t* picture_buffer, uint32_t save_file_index);
+void sd_simple_write_test(void);
 
 #ifdef __cplusplus
 }

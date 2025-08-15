@@ -21,12 +21,12 @@
 //======================================================================================================================
 // LCD pin configuration
 #define LCD_HOST SPI2_HOST
-#define PIN_NUM_MOSI 13  // ST7789 SDA
-#define PIN_NUM_CLK 14   // ST7789 SCL
-#define PIN_NUM_DC 33    // ST7789 DC
+#define PIN_NUM_MOSI 32  // ST7789 SDA
+#define PIN_NUM_CLK 33   // ST7789 SCL
+#define PIN_NUM_DC 0    // ST7789 DC
 #define PIN_NUM_CS -1    // Not use
-#define PIN_NUM_RST 32   // ST7789 RES (Not use HW reset)
-#define PIN_NUM_BL 15    // ST7789 BLK (Backlight)
+#define PIN_NUM_RST 13   // ST7789 RES (Not use HW reset)
+#define PIN_NUM_BL -1    // ST7789 BLK (Backlight)
 
 // LCD parameters
 #define LCD_WIDTH 240
